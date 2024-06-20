@@ -25,7 +25,7 @@ public interface PaperMapper {
     List<Papers> GetALL();
     //根据论文名字查论文
     @Select("SELECT * FROM papers WHERE papers.title = #{Title}")
-    Papers FindByTitle(String Title);
+    List<Papers> FindByTitle(String Title);
 
     //根据关键字查论文
     @Select("SELECT * FROM papers WHERE papers.id " +
@@ -34,7 +34,7 @@ public interface PaperMapper {
     List<Papers> FindByKeywords(String Keywords);
     //根据id查论文
     @Select("SELECT * from papers WHERE id = #{id}")
-    Papers findById(Integer id);
+    List<Papers> findById(Integer id);
     //根据时间查论文
     @Select("SELECT * FROM papers WHERE papers.publication_date = #{date}")
     List<Papers> FindByDate(Date date);

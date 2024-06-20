@@ -32,7 +32,7 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Papers find_by_title(String title) {
+    public List<Papers> find_by_title(String title) {
         return paperMapper.FindByTitle(title);
     }
 
@@ -47,7 +47,7 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
-    public Papers find_by_id(Integer id) {
+    public List<Papers> find_by_id(Integer id) {
         return paperMapper.findById(id);
     }
 

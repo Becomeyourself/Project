@@ -4,15 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="重新配置了IDEA">
+    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="实现了分类的增删改">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/CategoryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/CategoryMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/PaperMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/PaperMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/PaperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/PaperService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/CategoryServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/PaperServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/PaperServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -107,7 +104,8 @@
       <workItem from="1718852583693" duration="134000" />
       <workItem from="1718852736044" duration="16000" />
       <workItem from="1718852940295" duration="2435000" />
-      <workItem from="1718860408886" duration="4267000" />
+      <workItem from="1718860408886" duration="4338000" />
+      <workItem from="1718864963100" duration="9792000" />
     </task>
     <task id="LOCAL-00001" summary="重新配置了IDEA">
       <option name="closed" value="true" />
@@ -117,15 +115,35 @@
       <option name="project" value="LOCAL" />
       <updated>1718852706837</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="实现了分类的增删改">
+      <option name="closed" value="true" />
+      <created>1718864701349</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1718864701349</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="重新配置了IDEA" />
-    <option name="LAST_COMMIT_MESSAGE" value="重新配置了IDEA" />
+    <MESSAGE value="实现了分类的增删改" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现了分类的增删改" />
   </component>
 </project>

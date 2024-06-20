@@ -15,13 +15,13 @@ public interface PaperService {
     public List<Papers> find_by_category(String category);
 
     //根据论文名字查论文
-    public Papers find_by_title(String title);
+    public List<Papers> find_by_title(String title);
     //根据关键字查论文
     public List<Papers> find_by_keyword(String keyword);
     //根据刊物查论文
     public List<Papers> find_by_journal(String journal);
     //根据id查论文
-    public Papers find_by_id(Integer id);
+    public List<Papers> find_by_id(Integer id);
     //添加
     public void add_paper(Papers paper);
     //删除

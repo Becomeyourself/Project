@@ -40,8 +40,8 @@ public class PaperController {
     }
     //根据分类查论文
     @GetMapping("/Categories")
-    public Result<List<Papers>> Find_By_Categories(String Categories){
-        List<Papers> temp = paperService.find_by_category(Categories);
+    public Result<List<Papers>> Find_By_Categories(String categories){
+        List<Papers> temp = paperService.find_by_category(categories);
         return Result.success(temp);
     }
     //查询全部论文
@@ -53,20 +53,20 @@ public class PaperController {
 
     //根据论文名字查论文
     @GetMapping("/Title")
-    public Result<Papers> Find_By_Title(String Title){
-        Papers temp = paperService.find_by_title(Title);
+    public Result<List<Papers>> Find_By_Title(String title){
+        List<Papers> temp = paperService.find_by_title(title);
         return Result.success(temp);
     }
     //根据关键字查论文
     @GetMapping("/Keyword")
-    public Result<List<Papers>> Find_By_Keyword(String Keyword){
-        List<Papers> temp = paperService.find_by_keyword(Keyword);
+    public Result<List<Papers>> Find_By_Keyword(String keyword){
+        List<Papers> temp = paperService.find_by_keyword(keyword);
         return Result.success(temp);
     }
     //根据刊物查论文
     @GetMapping("/Journal")
-    public Result<List<Papers>> Find_By_Journal(String Journal){
-        List<Papers> temp = paperService.find_by_journal(Journal);
+    public Result<List<Papers>> Find_By_Journal(String journal){
+        List<Papers> temp = paperService.find_by_journal(journal);
         return Result.success(temp);
     }
     //添加
@@ -86,7 +86,7 @@ public class PaperController {
         p.setJournalId(j.getId());
         p.setFilePath(paperDo.getFile_path());
         p.setPublicationDate(paperDo.getPublicationDate());
-        Papers papers=paperService.find_by_title(p.getTitle());
+        List<Papers> papers=paperService.find_by_title(p.getTitle());
         String author1= paperDo.getAuthor1();
         String author2= paperDo.getAuthor2();
         Integer aid1=null;
@@ -108,9 +108,10 @@ public class PaperController {
             }
         }
         Integer id;
-        if(papers==null){
+        if(papers != null && !papers.isEmpty()){
             paperService.add_paper(p);
-            id=paperService.find_by_title(p.getTitle()).getId();
+            List<Papers> temp = paperService.find_by_title(p.getTitle());
+            id = temp.get(0).getId();
             Paper_author pp=new Paper_author();
             pp.setPaperId(id);
             pp.setAuthorId(aid1);
@@ -129,8 +130,8 @@ public class PaperController {
     //删除，只删除了paper_authors和papers两个表格
     @DeleteMapping
     public Result<String> delete_paper(Integer id){
-        Papers p=paperService.find_by_id(id);
-        if(p==null)  return Result.error("no such paper");
+        List<Papers> p=paperService.find_by_id(id);
+        if(p != null && !p.isEmpty())  return Result.error("no such paper");
         else{
             paper_authorService.delete(id);
             paperService.dele_paper(id);
