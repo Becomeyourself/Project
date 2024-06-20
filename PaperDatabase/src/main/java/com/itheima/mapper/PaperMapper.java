@@ -32,7 +32,9 @@ public interface PaperMapper {
             "IN ( SELECT id FROM paper_keywords NATURAL JOIN keywords  " +
             "WHERE keywords.keyword = #{Keywords})")
     List<Papers> FindByKeywords(String Keywords);
-
+    //根据id查论文
+    @Select("SELECT * from papers WHERE id = #{id}")
+    Papers findById(Integer id);
     //根据时间查论文
     @Select("SELECT * FROM papers WHERE papers.publication_date = #{date}")
     List<Papers> FindByDate(Date date);

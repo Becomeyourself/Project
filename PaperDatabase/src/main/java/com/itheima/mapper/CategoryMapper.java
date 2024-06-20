@@ -30,4 +30,7 @@ public interface CategoryMapper {
 
     @Select("select * from categories where name= #{name}")
     Category findByname(String name);
+
+    @Update("update categories SET parent_id = #{parentId},name = #{name} where id =#{id}")
+    void update(Category category);
 }

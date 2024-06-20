@@ -1,7 +1,6 @@
 package com.itheima.service;
 
 import com.itheima.pojo.Papers;
-import com.itheima.pojo.Result;
 
 import java.util.List;
 
@@ -21,6 +20,8 @@ public interface PaperService {
     public List<Papers> find_by_keyword(String keyword);
     //根据刊物查论文
     public List<Papers> find_by_journal(String journal);
+    //根据id查论文
+    public Papers find_by_id(Integer id);
     //添加
     public void add_paper(Papers paper);
     //删除

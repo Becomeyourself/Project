@@ -47,6 +47,11 @@ public class PaperServiceImpl implements PaperService {
     }
 
     @Override
+    public Papers find_by_id(Integer id) {
+        return paperMapper.findById(id);
+    }
+
+    @Override
     public void add_paper(Papers paper){paperMapper.add(paper);}
 
     @Override

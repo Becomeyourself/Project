@@ -4,8 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="">
+    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="重新配置了IDEA">
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/CategoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/PaperMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/PaperMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/PaperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/PaperService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/PaperServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/PaperServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,47 +23,62 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Becomeyourself"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Becomeyourself&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Becomeyourself/Project.git",
-    "accountId": "184c4d04-1bc3-4546-98d9-5cafc07ebe57"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Becomeyourself/Project.git&quot;,
+    &quot;accountId&quot;: &quot;184c4d04-1bc3-4546-98d9-5cafc07ebe57&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 0
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2i7ri5AGnqAzqAzg9xum6FUzh9Q" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.BigEventApplication.executor": "Run",
-    "git-widget-placeholder": "后端",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Maven.big-event [clean].executor&quot;: &quot;Run&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Spring Boot.BigEventApplication.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;后端&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql",
-      "redis"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;redis&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="BigEventApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="big-event" />
@@ -81,11 +104,28 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1718852581578</updated>
-      <workItem from="1718852583693" duration="58000" />
+      <workItem from="1718852583693" duration="134000" />
+      <workItem from="1718852736044" duration="16000" />
+      <workItem from="1718852940295" duration="2435000" />
+      <workItem from="1718860408886" duration="4267000" />
     </task>
+    <task id="LOCAL-00001" summary="重新配置了IDEA">
+      <option name="closed" value="true" />
+      <created>1718852706837</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1718852706837</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="重新配置了IDEA" />
+    <option name="LAST_COMMIT_MESSAGE" value="重新配置了IDEA" />
   </component>
 </project>

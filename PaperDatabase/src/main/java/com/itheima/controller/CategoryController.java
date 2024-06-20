@@ -33,11 +33,11 @@ public class CategoryController {
         return Result.success(c);
     }
 
-//    @PutMapping
-//    public Result update(@RequestBody @Validated(Category.Update.class) Category category){
-//        categoryService.update(category);
-//        return Result.success();
-//    }
+    @PutMapping
+    public Result update(@RequestBody Category category){
+        categoryService.update(category);
+        return Result.success();
+    }
 
     @DeleteMapping
     public Result delete(Integer id){

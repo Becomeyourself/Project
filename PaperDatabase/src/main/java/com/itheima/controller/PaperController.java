@@ -126,21 +126,18 @@ public class PaperController {
         }
     }
 
-    //删除,默认论文名字唯一，只删除了paper_authors和papers两个表格
-    @PostMapping("/delete")
-    public Result<String> delete_paper(String name){
-        Papers p=paperService.find_by_title(name);
-        if(p==null)  return Result.error("no such file");
+    //删除，只删除了paper_authors和papers两个表格
+    @DeleteMapping
+    public Result<String> delete_paper(Integer id){
+        Papers p=paperService.find_by_id(id);
+        if(p==null)  return Result.error("no such paper");
         else{
-            Integer pid=p.getId();
-            paper_authorService.delete(pid);
-            paperService.dele_paper(pid);
+            paper_authorService.delete(id);
+            paperService.dele_paper(id);
 
             return Result.success();
 
         }
-
-
 
     }
 
