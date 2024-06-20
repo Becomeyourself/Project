@@ -2,11 +2,12 @@
 
 //导入axios  npm install axios
 import axios from 'axios';
+
+import { ElMessage } from 'element-plus'
 //定义一个变量,记录公共的前缀  ,  baseURL
 //const baseURL = 'http://localhost:8080';
 const baseURL = '/api';
 const instance = axios.create({ baseURL })
-
 
 import {useTokenStore} from '@/stores/token.js'
 //添加请求拦截器
@@ -27,7 +28,8 @@ instance.interceptors.request.use(
     }
 )
 
-
+/* import {useRouter} from 'vue-router'
+const router = useRouter(); */
 
 import router from '@/router'
 //添加响应拦截器

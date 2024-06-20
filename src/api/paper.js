@@ -11,3 +11,9 @@ export const paperListService = ()=>{
 export const paperAddService = (paperData)=>{
     return request.post('/Paper/add',paperData);
 }
+
+//论文删除
+export const paperCategoryDeleteService = (id)=>{
+    return request.delete('/Paper?id='+id)
+}
+
