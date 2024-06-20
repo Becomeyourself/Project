@@ -56,7 +56,8 @@ const onCurrentChange = (num) => {
     paperList()
 }
 
-import {paperListService,paperAddService} from '@/api/paper.js'
+import { paperListService, paperAddService, paperDeleteService, authorFindService, categoryFindService, titleFindService, keywordFindService, journalFindService } from '@/api/paper.js';
+
 //获取文章列表数据
 const paperList = async () => {
     let result = await paperListService();
@@ -64,7 +65,6 @@ const paperList = async () => {
     //渲染视图
     papers.value = result.data;
 }
-
 paperList();
 
 import {ElMessage} from 'element-plus'
@@ -82,10 +82,97 @@ const addpaper = async ()=>{
     //刷新当前列表
     paperList()
 }
+//删除分类
+import {ElMessageBox} from 'element-plus'
+const deletePaper = async (row)=>{
+    //提示用户  确认框
+
+    ElMessageBox.confirm(
+        '你确认要删除该分类信息吗?',
+        '温馨提示',
+        {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning',
+        }
+    )
+        .then(async () => {
+            //调用接口
+            let result = await paperDeleteService(row.id);
+            ElMessage({
+                type: 'success',
+                message: '删除成功',
+            })
+            //刷新列表
+            paperList()
+        })
+        .catch(() => {
+            ElMessage({
+                type: 'info',
+                message: '用户取消了删除',
+            })
+        })  
+}
 //导入token
 import { useTokenStore } from '@/stores/token.js';
 const tokenStore = useTokenStore();
+//查询操作
+const searchType = ref('');
+const searchContent = ref('');
 
+const findPaper = async() =>{
+    let result;
+
+    if (searchContent.value === "") {
+        ElMessage.error('请输入有效的搜索内容');
+        return;
+    }
+
+    try {
+        switch (searchType.value) {
+            case 'author':
+                console.log('调用 authorFindService 之前');
+                result = await authorFindService(searchContent.value);
+                console.log('调用 authorFindService 之后', result);
+                break;
+            case 'title':
+                console.log('调用 titleFindService 之前');
+                result = await titleFindService(searchContent.value);
+                console.log('调用 titleFindService 之后', result);
+                break;
+            case 'keyword':
+                console.log('调用 keywordFindService 之前');
+                result = await keywordFindService(searchContent.value);
+                console.log('调用 keywordFindService 之后', result);
+                break;
+            case 'date':
+                console.log('调用 dateFindService 之前');
+                // result = await dateFindService(searchContent.value);
+                console.log('调用 dateFindService 之后', result);
+                break;
+            case 'journal':
+                console.log('调用 journalFindService 之前');
+                result = await journalFindService(searchContent.value);
+                console.log('调用 journalFindService 之后', result);
+                break;
+            case 'category':
+                console.log('调用 categoryFindService 之前');
+                result = await categoryFindService(searchContent.value);
+                console.log('调用 categoryFindService 之后', result);
+                break;
+            default:
+                ElMessage.error('请选择一个有效的搜索条件');
+                return;
+        }
+        ElMessage.success(result.msg? result.msg:'查询成功');
+        papers.value = result.data;
+        return;
+    }catch (error) {
+        console.error('搜索失败:', error);
+        ElMessage.error('搜索失败，请重试');
+    }
+
+}
 </script>
 <template>
     <el-card class="page-container">
@@ -98,13 +185,33 @@ const tokenStore = useTokenStore();
             </div>
         </template>
         <!-- 搜索表单 -->
-        <el-form inline>
+                <el-form inline>
+            <!-- 下拉栏 -->
+            <el-form-item>
+                <el-select v-model="searchType" placeholder="选择搜索条件">
+                    <el-option label="按作者" value="author"></el-option>
+                    <el-option label="按论文名称" value="title"></el-option>
+                    <el-option label="按关键字" value="keyword"></el-option>
+                    <el-option label="按时间" value="date"></el-option>
+                    <el-option label="按刊物" value="journal"></el-option>
+                    <el-option label="按类别" value="category"></el-option>
+                </el-select>
+                </el-form-item>
+                
+                <!-- 搜索内容输入框 -->
+                <el-form-item>
+                <el-input v-model="searchContent" placeholder="请输入搜索内容"></el-input>
+                </el-form-item>
 
-        </el-form>
+                <!-- 确认查询按钮 -->
+                <el-form-item>
+                <el-button type="primary" @click="findPaper()">查询</el-button>
+                </el-form-item>
+            </el-form>
         <!-- 文章列表 -->
             <el-table :data="papers" style="width: 100%">
                 <el-table-column label="论文标题" width="400" prop="title"></el-table-column>
-                <el-table-column label="简介" prop="abstract"></el-table-column>
+                <el-table-column label="简介" prop="abstractText"></el-table-column>
                 <el-table-column label="期刊" prop="journalId"> </el-table-column>
                 <el-table-column label="分类" prop="categoryId"></el-table-column>
                 <el-table-column label="文件路径" prop="filePath"></el-table-column>
@@ -112,7 +219,7 @@ const tokenStore = useTokenStore();
                 <el-table-column label="操作" width="100">
                     <template #default="{ row }">
                         <el-button :icon="Edit" circle plain type="primary"></el-button>
-                        <el-button :icon="Delete" circle plain type="danger"></el-button>
+                        <el-button :icon="Delete" circle plain type="danger" @click="deletePaper(row)"></el-button>
                     </template>
                 </el-table-column>
                 <template #empty>
