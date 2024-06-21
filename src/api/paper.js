@@ -30,7 +30,10 @@ export const categoryFindService = (category)=>{
 export const titleFindService = (title)=>{
     return request.get('/Paper/Title?title='+title)
 }
-
+//按照时间查论文
+export const dateFindService = (date) =>{
+    return request.get('/Paper/date?date='+date);
+}
 //按照关键字查论文
 export const keywordFindService = (Keyword)=>{
     return request.get('/Paper/Keyword?keyword='+Keyword)

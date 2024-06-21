@@ -12,7 +12,7 @@ const papers = ref([
     {
         id: 1,
         title: "Paper on Machine Learning",
-        abstractText: "",
+        abstract: "",
         journalId: 1,
         categoryId: 1,
         filePath: "/path/to/machine_learning.pdf",
@@ -21,7 +21,7 @@ const papers = ref([
     {
         id: 2,
         title: "Paper on Quantum Mechanics",
-        abstractText: "",
+        abstract: "",
         journalId: 2,
         categoryId: 2,
         filePath: "/path/to/quantum_mechanics.pdf",
@@ -34,7 +34,7 @@ const paperModel = ref({
     "author1" : "",
     "author2" : "",
     "title" : "",
-    "abstractText":"",
+    "abstract":"",
     "journal":"",
     "category":"",
     "file_path":"",
@@ -56,7 +56,7 @@ const onCurrentChange = (num) => {
     paperList()
 }
 
-import { paperListService, paperAddService, paperDeleteService, authorFindService, categoryFindService, titleFindService, keywordFindService, journalFindService } from '@/api/paper.js';
+import { paperListService, paperAddService, paperDeleteService, authorFindService, categoryFindService,dateFindService, titleFindService, keywordFindService, journalFindService } from '@/api/paper.js';
 
 //获取文章列表数据
 const paperList = async () => {
@@ -147,7 +147,7 @@ const findPaper = async() =>{
                 break;
             case 'date':
                 console.log('调用 dateFindService 之前');
-                // result = await dateFindService(searchContent.value);
+                 result = await dateFindService(searchContent.value);
                 console.log('调用 dateFindService 之后', result);
                 break;
             case 'journal':
@@ -211,7 +211,7 @@ const findPaper = async() =>{
         <!-- 文章列表 -->
             <el-table :data="papers" style="width: 100%">
                 <el-table-column label="论文标题" width="400" prop="title"></el-table-column>
-                <el-table-column label="简介" prop="abstractText"></el-table-column>
+                <el-table-column label="简介" prop="abstract"></el-table-column>
                 <el-table-column label="期刊" prop="journalId"> </el-table-column>
                 <el-table-column label="分类" prop="categoryId"></el-table-column>
                 <el-table-column label="文件路径" prop="filePath"></el-table-column>

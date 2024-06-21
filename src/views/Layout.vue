@@ -8,7 +8,8 @@ import {
     Crop,
     EditPen,
     SwitchButton,
-    CaretBottom
+    CaretBottom,
+    Reading
 } from '@element-plus/icons-vue'
 import avatar from '@/assets/default.png'
 </script>
@@ -20,12 +21,32 @@ import avatar from '@/assets/default.png'
             <div class="el-aside__logo"></div>
             <el-menu active-text-color="#ffd04b" background-color="#232323"  text-color="#fff"
                 router>
-                <el-menu-item index="/paper/category">
-                    <el-icon>
-                        <Management />
-                    </el-icon>
-                    <span>论文分类</span>
-                </el-menu-item>
+                <el-submenu index="1">
+                    <template #title>
+                        <el-icon>
+                            <UserFilled />
+                        </el-icon>
+                        <span>出版商管理</span>
+                    </template>
+                    <el-menu-item index="/paper/category">
+                        <el-icon>
+                            <Management />
+                        </el-icon>
+                        <span>论文分类</span>
+                    </el-menu-item>
+                    <el-menu-item index="/paper/author">
+                        <el-icon>
+                            <User />
+                        </el-icon>
+                        <span>论文作者</span>
+                    </el-menu-item>
+                    <el-menu-item index="/paper/journal">
+                        <el-icon>
+                            <EditPen />
+                        </el-icon>
+                        <span>论文期刊</span>
+                    </el-menu-item>
+                </el-submenu>
                 <el-menu-item index="/paper/manage">
                     <el-icon>
                         <Promotion />
@@ -65,7 +86,7 @@ import avatar from '@/assets/default.png'
         <el-container>
             <!-- 头部区域 -->
             <el-header>
-                <div>黑马程序员：<strong>东哥</strong></div>
+                <div>论文管理系统：<strong></strong></div>
                 <el-dropdown placement="bottom-end">
                     <span class="el-dropdown__box">
                         <el-avatar :src="avatar" />
@@ -91,7 +112,7 @@ import avatar from '@/assets/default.png'
                 <router-view></router-view>
             </el-main>
             <!-- 底部区域 -->
-            <el-footer>大事件 ©2023 Created by 黑马程序员</el-footer>
+            <el-footer>论文管理系统 ©2024 Created by 软工小组</el-footer>
         </el-container>
     </el-container>
 </template>
