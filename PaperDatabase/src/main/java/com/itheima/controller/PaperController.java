@@ -7,6 +7,7 @@ import com.itheima.service.PaperService;
 import com.itheima.service.authorService;
 import com.itheima.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -50,7 +51,12 @@ public class PaperController {
         List<Papers> temp = paperService.find_all();
         return Result.success(temp);
     }
-
+    //根据时间查论文
+    @GetMapping("/date")
+    public Result<List<Papers>> Find_By_Date( @DateTimeFormat(pattern = "yyyy-MM-dd")Date date){
+        List<Papers> temp = paperService.find_by_date(date);
+        return Result.success(temp);
+    }
     //根据论文名字查论文
     @GetMapping("/Title")
     public Result<List<Papers>> Find_By_Title(String title){
@@ -71,7 +77,6 @@ public class PaperController {
     }
     //添加
 
-
     //会添加paper_author和author两个表格，还有papers
     @PostMapping("/add")
     public Result<String> add_paper(@RequestBody PapersDo paperDo){
@@ -82,33 +87,35 @@ public class PaperController {
         p.setTitle(paperDo.getTitle());
         p.setAbstract(paperDo.getAbstractText());
         p.setCategoryId(c.getId());
-        journal j=JournalService.findByname(paperDo.getJournal());
-        p.setJournalId(j.getId());
+        List<Journal> j=JournalService.findByName(paperDo.getJournal());
+
+        p.setJournalId(j.get(0).getId());
         p.setFilePath(paperDo.getFile_path());
         p.setPublicationDate(paperDo.getPublicationDate());
         List<Papers> papers=paperService.find_by_title(p.getTitle());
-        String author1= paperDo.getAuthor1();
-        String author2= paperDo.getAuthor2();
+        author author1 = null,author2 = null;
+        author1.setName(paperDo.getAuthor1()) ;
+        author2.setName(paperDo.getAuthor2()) ;
         Integer aid1=null;
         Integer aid2=null;
-        if(!Objects.equals(author1, "")){
-            aid1= authorService.findByname(author1);
+        if(!Objects.equals(author1.getName(), "")){
+            aid1= authorService.findByname(author1.getName());
             if(aid1==null){
                 authorService.add(author1);
-                aid1=authorService.findByname(author1);
+                aid1=authorService.findByname(author1.getName());
             }
         }
         System.out.println(author2);
 
-        if(!Objects.equals(author2, "")){
-            aid2=authorService.findByname(author2);
+        if(!Objects.equals(author2.getName(), "")){
+            aid2=authorService.findByname(author2.getName());
             if(aid2==null){
                 authorService.add(author2);
-                aid2=authorService.findByname(author2);
+                aid2=authorService.findByname(author2.getName());
             }
         }
         Integer id;
-        if(papers != null && !papers.isEmpty()){
+        if(papers == null || papers.isEmpty()){
             paperService.add_paper(p);
             List<Papers> temp = paperService.find_by_title(p.getTitle());
             id = temp.get(0).getId();

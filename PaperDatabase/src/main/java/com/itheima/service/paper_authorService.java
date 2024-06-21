@@ -1,7 +1,7 @@
 package com.itheima.service;
 
 import com.itheima.pojo.Paper_author;
-import com.itheima.pojo.journal;
+import com.itheima.pojo.Journal;
 
 import java.util.List;
 

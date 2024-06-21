@@ -6,6 +6,7 @@ import com.itheima.service.PaperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -29,6 +30,11 @@ public class PaperServiceImpl implements PaperService {
     public List<Papers> find_by_category(String category) {
 
         return paperMapper.FindByCategories(category);
+    }
+
+    @Override
+    public List<Papers> find_by_date(Date date) {
+        return paperMapper.FindByDate(date);
     }
 
     @Override

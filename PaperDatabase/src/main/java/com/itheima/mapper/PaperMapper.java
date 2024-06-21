@@ -3,6 +3,7 @@ package com.itheima.mapper;
 import com.itheima.pojo.Papers;
 import com.itheima.pojo.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.List;
@@ -36,8 +37,8 @@ public interface PaperMapper {
     @Select("SELECT * from papers WHERE id = #{id}")
     List<Papers> findById(Integer id);
     //根据时间查论文
-    @Select("SELECT * FROM papers WHERE papers.publication_date = #{date}")
-    List<Papers> FindByDate(Date date);
+    @Select("SELECT * FROM papers WHERE DATE(papers.publication_date)  =  DATE(#{date})")
+    List<Papers> FindByDate(@Param("date") @DateTimeFormat(pattern = "yyyy-MM-dd")Date date);
     //根据刊物查论文
     @Select("SELECT * FROM papers WHERE papers.id " +
             "IN ( SELECT id FROM journals  " +

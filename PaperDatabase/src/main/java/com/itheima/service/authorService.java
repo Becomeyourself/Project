@@ -16,5 +16,8 @@ public interface authorService {
     //根据id查询分类信息
     Integer findByname(String name);
 
-    void add(String name);
+    void add(author Author);
+    void update(author Author);
+    void delete(Integer id);
 }
+

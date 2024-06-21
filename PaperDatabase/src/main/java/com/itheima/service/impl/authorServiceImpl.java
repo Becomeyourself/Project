@@ -33,7 +33,18 @@ public class authorServiceImpl implements authorService {
     }
 
     @Override
-    public void add(String name) {
-        authorMapper.add(name);
+    public void add(author Author) {
+        authorMapper.add(Author);
     }
+
+    @Override
+    public void update(author Author) {
+        authorMapper.update(Author);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        authorMapper.deleteById(id);
+    }
+
 }

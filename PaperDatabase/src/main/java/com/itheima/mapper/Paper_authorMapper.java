@@ -1,7 +1,7 @@
 package com.itheima.mapper;
 
 import com.itheima.pojo.Paper_author;
-import com.itheima.pojo.journal;
+import com.itheima.pojo.Journal;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
