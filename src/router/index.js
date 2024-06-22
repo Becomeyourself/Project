@@ -8,6 +8,8 @@ import PaperCategoryVue from '@/views/paper/PaperCategory.vue'
 import PaperManageVue from '@/views/paper/PaperManage.vue'
 import PaperAuthorVue from '@/views/paper/PaperAuthor.vue'
 import PaperJournalVue from '@/views/paper/PaperJournal.vue'
+import PaperKeywordVue from '@/views/paper/PaperKeyword.vue'
+
 import UserAvatarVue from '@/views/user/UserAvatar.vue'
 import UserInfoVue from '@/views/user/UserInfo.vue'
 import UserResetPasswordVue from '@/views/user/UserResetPassword.vue'
@@ -24,7 +26,9 @@ const routes = [
             { path: '/user/avatar', component: UserAvatarVue },
             { path: '/user/resetPassword', component: UserResetPasswordVue },
             { path: '/paper/author', component: PaperAuthorVue},
-            { path: '/paper/journal',component: PaperJournalVue}
+            { path: '/paper/journal',component: PaperJournalVue},
+            { path: '/paper/keyword', component: PaperKeywordVue}
+
         ]
     }
 ]

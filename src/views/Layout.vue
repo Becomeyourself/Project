@@ -21,7 +21,40 @@ import avatar from '@/assets/default.png'
             <div class="el-aside__logo"></div>
             <el-menu active-text-color="#ffd04b" background-color="#232323"  text-color="#fff"
                 router>
-                <el-submenu index="1">
+
+                <el-menu-item index="/paper/manage">
+                    <el-icon>
+                        <Promotion />
+                    </el-icon>
+                    <span>论文管理</span>
+                </el-menu-item>
+                <el-sub-menu index="1">
+                    <template #title>
+                        <el-icon>
+                            <UserFilled />
+                        </el-icon>
+                        <span>个人中心</span>
+                    </template>
+                    <el-menu-item index="/user/info">
+                        <el-icon>
+                            <User />
+                        </el-icon>
+                        <span>基本资料</span>
+                    </el-menu-item>
+                    <el-menu-item index="/user/avatar">
+                        <el-icon>
+                            <Crop />
+                        </el-icon>
+                        <span>更换头像</span>
+                    </el-menu-item>
+                    <el-menu-item index="/user/resetPassword">
+                        <el-icon>
+                            <EditPen />
+                        </el-icon>
+                        <span>重置密码</span>
+                    </el-menu-item>
+                </el-sub-menu>
+                <el-sub-menu index="2">
                     <template #title>
                         <el-icon>
                             <UserFilled />
@@ -46,37 +79,11 @@ import avatar from '@/assets/default.png'
                         </el-icon>
                         <span>论文期刊</span>
                     </el-menu-item>
-                </el-submenu>
-                <el-menu-item index="/paper/manage">
-                    <el-icon>
-                        <Promotion />
-                    </el-icon>
-                    <span>论文管理</span>
-                </el-menu-item>
-                <el-sub-menu >
-                    <template #title>
-                        <el-icon>
-                            <UserFilled />
-                        </el-icon>
-                        <span>个人中心</span>
-                    </template>
-                    <el-menu-item index="/user/info">
-                        <el-icon>
-                            <User />
-                        </el-icon>
-                        <span>基本资料</span>
-                    </el-menu-item>
-                    <el-menu-item index="/user/avatar">
-                        <el-icon>
-                            <Crop />
-                        </el-icon>
-                        <span>更换头像</span>
-                    </el-menu-item>
-                    <el-menu-item index="/user/resetPassword">
+                    <el-menu-item index="/paper/keyword">
                         <el-icon>
                             <EditPen />
                         </el-icon>
-                        <span>重置密码</span>
+                        <span>论文关键词</span>
                     </el-menu-item>
                 </el-sub-menu>
             </el-menu>
