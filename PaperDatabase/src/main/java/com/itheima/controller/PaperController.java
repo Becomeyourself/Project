@@ -1,15 +1,17 @@
 package com.itheima.controller;
 
 
-import com.itheima.mapper.Paper_authorMapper;
 import com.itheima.pojo.*;
-import com.itheima.service.PaperService;
-import com.itheima.service.authorService;
+import com.itheima.service.Paper_filesService;
 import com.itheima.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -31,6 +33,12 @@ public class PaperController {
 
     @Autowired
     paper_authorServiceImpl paper_authorService;
+
+    @Autowired
+    Paper_filesServiceImpl Paper_filesService;
+
+    @Autowired
+    Paper_refeServiceImpl Paper_refeService;
     //根据作者查论文
     // 在URL栏中输入你的API的URL，http://localhost:8080/Paper/Author?author_name=Alice
     //在URL的末尾添加?author_name=your_author_name，其中your_author_name是你想要查询的作者名字。
@@ -196,6 +204,92 @@ public class PaperController {
 
 
     }
+    //上传文件
+    @PostMapping("/upload")
+    public  Result<String> upload(MultipartFile file, String papername)throws IOException {
+        //打包成jar包前记得修改URL！！！！！！！！
+        String name=file.getOriginalFilename();
+        String UID= UUID.randomUUID().toString()+name.substring(name.lastIndexOf("."));
+        file.transferTo(new File("C:\\Users\\kjhgb\\Desktop\\java\\files\\"+UID));
+        //根据filename找到paperid
+        List<Papers> temp=paperService.find_by_title(papername);
+        Integer paperid=temp.get(0).getId();
+        paper_files pf=new paper_files();
+        pf.setPaperId(paperid);
+        pf.setFilePath("C:\\Users\\kjhgb\\Desktop\\java\\files\\"+UID);
+        pf.setUploadDate(LocalDateTime.now().toString());
+        Paper_filesService.add(pf);
 
+        return Result.success();
+
+    }
+
+    //返回文件本地地址
+    @GetMapping("/download")
+    public  Result<String> dowload(String name){
+        //papername->id
+        Integer id=paperService.find_by_title(name).get(0).getId();
+        String filepath="";
+        if(!Paper_filesService.search(id).isEmpty()) {
+            filepath = Paper_filesService.search(id).get(0).getFilePath();
+            return Result.success(filepath);
+        }
+        return Result.error("This file is not upload yet!");
+    }
+
+    @PostMapping("/addrefe")
+    public  Result<String> addrefe(String name1,String name2){
+        List<Papers> p=paperService.find_by_title(name1);
+        if(p.isEmpty()) return Result.error("no such files!");
+        List<Papers> p1=paperService.find_by_title(name2);
+        if(p1.isEmpty()){
+            //在paper插入参考文献
+            Papers paper=new Papers();
+            paper.setTitle(name2);
+            paper.setCategoryId(1);
+            paper.setJournalId(1);
+            paperService.add_paper(paper);
+        }
+        Integer id1=p.get(0).getId();
+        Integer id2=paperService.find_by_title(name2).get(0).getId();
+        paper_refe pp=new paper_refe();
+        pp.setPaperId(id1);
+        pp.setReferenceId(id2);
+        Paper_refeService.add(pp);
+
+        return Result.success();
+
+    }
+
+    @PostMapping("/delerefe")
+    public  Result<String> delerefe(String name1,String name2){
+        paper_refe pp=new paper_refe();
+        List<Papers> p=paperService.find_by_title(name1);
+        if(p.isEmpty()) return Result.error("no such files!");
+        pp.setPaperId(p.get(0).getId());
+
+        p=paperService.find_by_title(name1);
+        if(p.isEmpty()) return Result.error("no such files!");
+        pp.setReferenceId(p.get(0).getId());
+
+
+        Paper_refeService.delete(pp);
+
+        return Result.success();
+
+    }
+
+    @GetMapping("/searchrefe")
+    Result<List<String>> searchrefe(String name){
+        if(paperService.find_by_title(name).isEmpty()) return Result.error("no such files");
+        Integer id=paperService.find_by_title(name).get(0).getId();
+        List<paper_refe> plist=Paper_refeService.searchlist(id);
+        List<String> result=new ArrayList<>();
+        for(paper_refe a:plist){
+            result.add(paperService.find_by_id(a.getReferenceId()).get(0).getTitle());
+        }
+        return Result.success(result);
+
+    }
 
 }

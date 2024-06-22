@@ -1,0 +1,32 @@
+package com.itheima.service.impl;
+
+import com.itheima.mapper.Paper_filesMapper;
+import com.itheima.pojo.paper_files;
+import com.itheima.service.Paper_filesService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+
+@Service
+public class Paper_filesServiceImpl implements Paper_filesService {
+    @Autowired
+    Paper_filesMapper Paper_filesMapper;
+
+    @Override
+    public void add(paper_files p) {
+        Paper_filesMapper.add(p);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        Paper_filesMapper.delete(id);
+    }
+
+    @Override
+    public List<paper_files> search(Integer id) {
+        return Paper_filesMapper.search(id);
+    }
+    //根据作者查论文
+
+}
