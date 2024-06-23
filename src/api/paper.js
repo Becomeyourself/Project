@@ -43,3 +43,7 @@ export const keywordFindService = (Keyword)=>{
 export const journalFindService = (Journal)=>{
     return request.get('/Paper/Journal?journal='+Journal)
 }
+//修改论文
+export const PaperUpdateService = (papersdo) =>{
+    return request.put('/Paper',papersdo)
+}

@@ -12,7 +12,7 @@ const papers = ref([
     {
         id: 1,
         title: "Paper on Machine Learning",
-        abstract: "",
+        abstract: "Paper on Machine Learning",
         journalId: 1,
         categoryId: 1,
         filePath: "/path/to/machine_learning.pdf",
@@ -21,25 +21,72 @@ const papers = ref([
     {
         id: 2,
         title: "Paper on Quantum Mechanics",
-        abstract: "",
+        abstract: "Paper on Quantum Mechanics",
         journalId: 2,
         categoryId: 2,
         filePath: "/path/to/quantum_mechanics.pdf",
         publicationDate: "2024-02-01"
     }
 ]);
+const categorys = ref([
+    {
+        "id": 0,
+        "parentId": 2,
+        "name": "计算机"
+    },
+    {
+        "id": 2,
+        "parentId": 3,
+        "name": "天文学"
+    },
+    {
+        "id": 3,
+        "parentId": 0,
+        "name": "地质学"
+    }
+])
+const Journal = ref([
+    {
+        "id": 0,
+        "name": "ACM"
+    },
+    {
+        "id": 2,
+        "name": "Nature"
+    },
+    {
+        "id": 3,
+        "name": "Science"
+    }
+])
 
+
+//定义变量,控制标题的展示
+const title = ref('')
 
 const paperModel = ref({
     "author1" : "",
     "author2" : "",
     "title" : "",
-    "abstract":"",
+    "abstractText":"",
     "journal":"",
     "category":"",
     "file_path":"",
     "publicationDate":""
 })
+
+//清除模型的数据
+const clearData = () => {
+    paperModel.value.author1 = '';
+    paperModel.value.author2 = '';
+    paperModel.value.title = '';
+    paperModel.value.abstractText = '';
+    paperModel.value.journal = '';
+    paperModel.value.category = '';
+    paperModel.value.file_path = '';
+    paperModel.value.publicationDate = '';
+}
+
 //分页条数据模型
 const pageNum = ref(1)//当前页
 const total = ref(20)//总条数
@@ -56,31 +103,105 @@ const onCurrentChange = (num) => {
     paperList()
 }
 
-import { paperListService, paperAddService, paperDeleteService, authorFindService, categoryFindService,dateFindService, titleFindService, keywordFindService, journalFindService } from '@/api/paper.js';
+import { paperListService, paperAddService, paperDeleteService, PaperUpdateService,authorFindService, categoryFindService,dateFindService, titleFindService, keywordFindService, journalFindService } from '@/api/paper.js';
 
 //获取文章列表数据
 const paperList = async () => {
     let result = await paperListService();
 
     //渲染视图
+    // total.value = result.data.total;
     papers.value = result.data;
+
+        //处理数据,给数据模型扩展一个属性categoryName,分类名称
+        for (let i = 0; i < papers.value.length; i++) {
+        let paper = papers.value[i];
+        for (let j = 0; j < categorys.value.length; j++) {
+            if (paper.categoryId == categorys.value[j].id) {
+                paper.categoryName = categorys.value[j].name;
+            }
+        }
+        //处理数据,给数据模型扩展一个属性JouranlName,分类名称
+        for (let i = 0; i < papers.value.length; i++) {
+        let paper = papers.value[i];
+        for(let k =0 ;k < Journal.value.length;k++){
+            {
+                if(paper.journalId == Journal.value[k].id){
+                    paper.journalName = Journal.value[k].name;
+                }
+            }
+        }
+        }
+
+
+    }
+
 }
+
+import {journalListService} from '@/api/journal.js'
+
+//获取文章分类列表数据
+const JournalList = async () => {
+    let result = await journalListService();
+
+    //渲染视图
+    Journal.value = result.data;
+}
+import {categoryListService} from '@/api/category.js'
+const categoryList = async () => {
+    let result = await categoryListService();
+
+    //渲染视图
+    categorys.value = result.data;
+}
+
+categoryList();
+JournalList();
 paperList();
 
 import {ElMessage} from 'element-plus'
 //控制抽屉是否显示
-const visibleDrawer = ref(false)
-const addpaper = async ()=>{
+const dialogVisible = ref(false)
+//展示编辑弹窗
+const showDialog = (row) => {
+    dialogVisible.value = true; 
+    title.value = '编辑论文';
+
+    // 数据拷贝
+    paperModel.value.id = row.id;
+    paperModel.value.title = row.title;
+    paperModel.value.abstractText = row.abstract;
+    paperModel.value.journal = row.journalName;
+    paperModel.value.category = row.categoryName;
+    paperModel.value.file_path = row.filePath;
+    paperModel.value.publicationDate = row.publicationDate;
+    paperModel.value.author1 = row.author1 || ''; // 如果没有提供作者1，则默认空字符串
+    paperModel.value.author2 = row.author2 || ''; // 如果没有提供作者2，则默认空字符串
+}
+
+const addPaper = async ()=>{
     //调用接口
     let result = await paperAddService(paperModel.value);
 
     ElMessage.success(result.msg? result.msg:'添加成功');
 
     //让抽屉消失
-    visibleDrawer.value = false;
+    dialogVisible.value = false;
 
     //刷新当前列表
     paperList()
+}
+const updatePaper = async ()=>{
+    let result = await PaperUpdateService(paperModel.value);
+
+    ElMessage.success(result.msg? result.msg:'修改成功');
+
+    //让抽屉消失
+    dialogVisible.value = false;
+
+    //刷新当前列表
+    paperList()
+
 }
 //删除分类
 import {ElMessageBox} from 'element-plus'
@@ -180,7 +301,7 @@ const findPaper = async() =>{
             <div class="header">
                 <span>论文管理</span>
                 <div class="extra">
-                    <el-button type="primary" @click="visibleDrawer = true">添加论文</el-button>
+                    <el-button type="primary" @click="dialogVisible = true;title = '添加论文'; clearData()">添加论文</el-button>
                 </div>
             </div>
         </template>
@@ -212,13 +333,13 @@ const findPaper = async() =>{
             <el-table :data="papers" style="width: 100%">
                 <el-table-column label="论文标题" width="400" prop="title"></el-table-column>
                 <el-table-column label="简介" prop="abstract"></el-table-column>
-                <el-table-column label="期刊" prop="journalId"> </el-table-column>
-                <el-table-column label="分类" prop="categoryId"></el-table-column>
+                <el-table-column label="期刊" prop="journalName"> </el-table-column>
+                <el-table-column label="分类" prop="categoryName"></el-table-column>
                 <el-table-column label="文件路径" prop="filePath"></el-table-column>
                 <el-table-column label="日期" prop="publicationDate"></el-table-column>
                 <el-table-column label="操作" width="100">
                     <template #default="{ row }">
-                        <el-button :icon="Edit" circle plain type="primary"></el-button>
+                        <el-button :icon="Edit" circle plain type="primary" @click="showDialog(row)"></el-button>
                         <el-button :icon="Delete" circle plain type="danger" @click="deletePaper(row)"></el-button>
                     </template>
                 </el-table-column>
@@ -233,9 +354,9 @@ const findPaper = async() =>{
             @current-change="onCurrentChange" style="margin-top: 20px; justify-content: flex-end" />
 
         <!-- 抽屉 -->
-        <el-drawer v-model="visibleDrawer" title="添加论文" direction="rtl" size="50%">
-            <!-- 添加论文表单 -->
-            <el-form :model="paperModel" label-width="100px">
+        <el-dialog v-model="dialogVisible" :title="title" width="50%">
+        <!-- 添加论文表单 -->
+        <el-form :model="paperModel" label-width="100px">
                 <el-form-item label="标题">
                     <el-input v-model="paperModel.title" placeholder="请输入标题"></el-input>
                 </el-form-item>
@@ -260,11 +381,14 @@ const findPaper = async() =>{
                 <el-form-item label="作者2">
                     <el-input v-model="paperModel.author2" placeholder="请输入作者2"></el-input>
                 </el-form-item>
-                <el-form-item>
-                    <el-button type="primary" @click="addpaper()" >添加</el-button>
-                </el-form-item>
-            </el-form>    
-        </el-drawer>
+            </el-form>
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="dialogVisible = false">取消</el-button>
+                    <el-button type="primary" @click="title == '添加论文' ? addPaper() : updatePaper()"> 确认 </el-button>
+                </span>
+            </template>
+        </el-dialog>
     </el-card>
 </template>
 <style lang="scss" scoped>
