@@ -39,6 +39,9 @@ public class PaperController {
 
     @Autowired
     Paper_refeServiceImpl Paper_refeService;
+    @Autowired
+    private com.itheima.mapper.journalMapper journalMapper;
+
     //根据作者查论文
     // 在URL栏中输入你的API的URL，http://localhost:8080/Paper/Author?author_name=Alice
     //在URL的末尾添加?author_name=your_author_name，其中your_author_name是你想要查询的作者名字。
@@ -156,7 +159,24 @@ public class PaperController {
         }
 
     }
+    //更新
+    @PutMapping
+    public Result<String> update_paper(@RequestBody PapersDo papersdo){
+        List<Journal> j=JournalService.findByName(papersdo.getJournal());
+        Category i = CategoryService.findByname(papersdo.getCategory());
+        //这里主要是因为传进来的是papersdo，先只支持修改papers本身
+        Papers paper = new Papers();
+        paper.setId(papersdo.getId());
+        paper.setTitle(papersdo.getTitle());
+        paper.setAbstract(papersdo.getAbstractText());
+        paper.setCategoryId(i.getId());
+        paper.setJournalId(j.get(0).getId());
+        paper.setFilePath(papersdo.getFile_path());
+        paper.setPublicationDate(papersdo.getPublicationDate());
 
+        paperService.update(paper);
+        return Result.success();
+    }
 
     //关系网络要调用的接口，大概是根据名字找到相联系的name列表
     @GetMapping("/search")

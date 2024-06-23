@@ -28,4 +28,6 @@ public interface PaperService {
     public void add_paper(Papers paper);
     //删除
     public void dele_paper(Integer id);
+    //修改
+    public void update(Papers paper);
 }

@@ -49,7 +49,7 @@ public interface PaperMapper {
             " values(#{title}, #{Abstract}, #{journalId}, #{categoryId}, #{filePath}, #{publicationDate})")
     void add(Papers paper);
 
-    @Update("UPDATE papers SET title = #{title}, abstract = #{abstractText}, journal_id = #{journalId}, " +
+    @Update("UPDATE papers SET title = #{title}, abstract = #{Abstract}, journal_id = #{journalId}, " +
             "category_id = #{categoryId}, file_path = #{filePath}, publication_date = #{publicationDate} " +
             "WHERE id = #{id}")
     void update(Papers paper);

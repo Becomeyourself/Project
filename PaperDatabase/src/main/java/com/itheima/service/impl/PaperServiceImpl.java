@@ -64,4 +64,9 @@ public class PaperServiceImpl implements PaperService {
     public void dele_paper(Integer id) {
         paperMapper.delete(id);
     }
+
+    @Override
+    public void update(Papers paper) {
+        paperMapper.update(paper);
+    }
 }
