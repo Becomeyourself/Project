@@ -4,13 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="实现了关键词的功能">
+    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="实现了论文的修改">
       <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/PaperMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/PaperMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/PaperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/PaperService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/PaperServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/PaperServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -128,7 +125,8 @@
       <workItem from="1718950668637" duration="1397000" />
       <workItem from="1719056674918" duration="4372000" />
       <workItem from="1719065277075" duration="1012000" />
-      <workItem from="1719108986072" duration="5036000" />
+      <workItem from="1719108986072" duration="5335000" />
+      <workItem from="1719118673078" duration="8368000" />
     </task>
     <task id="LOCAL-00001" summary="重新配置了IDEA">
       <option name="closed" value="true" />
@@ -170,7 +168,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719061022349</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="实现了论文的修改">
+      <option name="closed" value="true" />
+      <created>1719114759410</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1719114759410</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -194,6 +200,7 @@
     <MESSAGE value="缝缝补补一下午" />
     <MESSAGE value="实现了所有的增删改查" />
     <MESSAGE value="实现了关键词的功能" />
-    <option name="LAST_COMMIT_MESSAGE" value="实现了关键词的功能" />
+    <MESSAGE value="实现了论文的修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="实现了论文的修改" />
   </component>
 </project>

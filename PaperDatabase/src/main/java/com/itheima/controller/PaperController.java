@@ -179,50 +179,32 @@ public class PaperController {
     }
 
     //关系网络要调用的接口，大概是根据名字找到相联系的name列表
+
     @GetMapping("/search")
-    public Result<List<String>> social_search(String name){
-        List<String> result;
-        int aid=authorService.findByname(name);
-        System.out.println(aid);
-        List<Paper_author> pa=paper_authorService.findByaid(aid);
+    public Result<Map<String, List<String>>> social_search(Integer id) {
+        // 查到了作者所有的论文关系
+        List<Paper_author> papers = paper_authorService.findByaid(id);
+        // 创建了一个hashmap表格，第一个String是论文名，第二个List是作者名，这样可以方便画图
+        Map<String, List<String>> paperAuthorMap = new HashMap<>();
 
-        List<Integer>  pids = new ArrayList<>();
-        //拿到相关文章id
-        for (Paper_author paperAuthor : pa) {
-            //System.out.println(paperAuthor.getAuthorId());
-            pids.add(paperAuthor.getPaperId());
-        }
-        System.out.println(222);
-        System.out.println(pids);
+        for (Paper_author paperAuthor : papers) {
+            // 每次处理新的论文前，创建一个新的authorNames列表
+            List<String> authorNames = new ArrayList<>();
 
-        Set<Integer> aids = new HashSet<>();
-
-        // 遍历每个 pid 并获取相应的 Paper_author 列表
-        for (int pid : pids) {
-            List<Paper_author> paList = paper_authorService.findBypId(pid);
-            // 提取每个 Paper_author 的 aid 并加入到 aids 集合中
-            for (Paper_author paperAuthor : paList) {
-                aids.add(paperAuthor.getAuthorId());
+            // 查到了作者们
+            List<Paper_author> authors = paper_authorService.findBypId(paperAuthor.getPaperId());
+            // 获取论文标题
+            List<Papers> paper = paperService.find_by_id(paperAuthor.getPaperId());
+            String paperTitle = paper.get(0).getTitle();
+            // 把论文、作者们插入到map中
+            for (Paper_author authorRel : authors) {
+                String authorEntity = authorService.findById(authorRel.getAuthorId());
+                authorNames.add(authorEntity);
             }
 
+            paperAuthorMap.put(paperTitle, authorNames);
         }
-
-        // 移除初始 aid
-        aids.remove(aid);
-
-        // 将 Set 转换为 List
-        List<Integer> finalAidList = aids.stream().toList();
-        List<String> names = finalAidList.stream()
-                .map(authorService::findById)
-                .toList();
-
-
-        return Result.success(names);
-
-
-
-
-
+        return Result.success(paperAuthorMap);
     }
     //上传文件
     @PostMapping("/upload")
