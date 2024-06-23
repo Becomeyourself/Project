@@ -4,7 +4,7 @@ import {
     Delete
 } from '@element-plus/icons-vue'
 
-import {ref} from 'vue'
+import {ref, onMounted} from 'vue'
 
 const Author = ref([
     {
@@ -26,7 +26,7 @@ const AuthorModel = ref({
     'name' : ''
 })
 
-import {authorListService, authorAddService, authorDeleteService, authorUpdateService} from '@/api/author.js'
+import {authorListService, authorAddService, authorDeleteService, authorUpdateService,authorPaperService} from '@/api/author.js'
 
 //获取作者列表数据
 const AuthorList = async () => {
@@ -89,7 +89,7 @@ const updateAuthor = async () => {
 
     //让弹窗消失
     dialogVisible.value = false;
-
+    clearData();
     //刷新当前列表
     AuthorList()
 }
@@ -125,6 +125,77 @@ const deleteAuthor = (row) => {
         })
 }
 
+
+const searchType = ref('');
+import * as echarts from 'echarts'
+const Search = async () => {
+  try {
+    let result = await authorPaperService(AuthorModel.value)
+    if (result.code === 0) {
+      ElMessage.success(result.msg? result.msg:'查询成功')
+       drawChart(result.data)
+    } else {
+      ElMessage.error('搜索失败，请重试')
+    }
+  } catch (error) {
+    ElMessage.error('搜索失败，请重试')
+  }
+}
+const drawChart = (data) => {
+  const chartDom = document.getElementById('chart');
+  const myChart = echarts.init(chartDom);
+
+  const option = {
+    title: {
+      text: '论文与作者关系图'
+    },
+    tooltip: {},
+    series: [
+      {
+        type: 'graph',
+        layout: 'force',
+        force: {
+          repulsion: 300, // 增加节点间距
+          edgeLength: [50, 200]
+        },
+        roam: true, // 允许缩放和平移
+        label: {
+          show: true,
+          position: 'right',
+          formatter: '{b}'
+        },
+        data: [],
+        links: [],
+        lineStyle: {
+          color: 'source',
+          curveness: 0.3
+        }
+      }
+    ]
+  };
+
+  const nodes = new Map();
+  const links = [];
+
+  for (const paper in data) {
+    if (!nodes.has(paper)) {
+      nodes.set(paper, { name: paper, category: 0, symbolSize: 70 });
+    }
+    data[paper].forEach((author) => {
+      if (!nodes.has(author)) {
+        nodes.set(author, { name: author, category: 1, symbolSize: 50 });
+      }
+      links.push({ source: paper, target: author });
+    });
+  }
+
+  option.series[0].data = Array.from(nodes.values());
+  option.series[0].links = links;
+
+  myChart.setOption(option);
+};
+
+
 </script>
 
 <template>
@@ -137,6 +208,27 @@ const deleteAuthor = (row) => {
                 </div>
             </div>
         </template>
+        <!-- 搜索表单 -->
+        <el-form inline>
+            <!-- 下拉栏 -->
+            <el-form-item>
+                <el-select v-model="searchType" placeholder="论文关系网络搜索">
+                    <el-option label="作者姓名" value="author"></el-option>
+                </el-select>
+                </el-form-item>
+                
+                <!-- 搜索内容输入框 -->
+                <el-form-item>
+                    <el-select v-model="AuthorModel.id" placeholder="请选择作者">
+                <el-option v-for="j in Author" :key="j.id" :label="j.name" :value="j.id"></el-option>
+                    </el-select>
+                </el-form-item>
+
+                <!-- 确认查询按钮 -->
+                <el-form-item>
+                    <el-button type="primary" @click="Search()">查询</el-button>
+                </el-form-item>
+            </el-form>
         <el-table :data="Author" style="width: 100%">
             <el-table-column label="序号" width="100" prop="id"> </el-table-column>
             <el-table-column label="名字" prop="name"></el-table-column>
@@ -168,6 +260,9 @@ const deleteAuthor = (row) => {
                 </span>
             </template>
         </el-dialog>
+        <!-- 图表容器 -->
+        <div id="chart" style="width: 600px; height: 400px;"></div>
+
     </el-card>
 </template>
 

@@ -294,6 +294,28 @@ const findPaper = async() =>{
     }
 
 }
+//导出到Excel功能的实现
+import * as XLSX from 'xlsx'
+const exportToExcel = () => {
+  // 创建一个新的工作簿
+  const wb = XLSX.utils.book_new()
+
+  // 将数据转换为工作表
+  const ws = XLSX.utils.json_to_sheet(papers.value.map(paper => ({
+    '论文标题': paper.title,
+    '简介': paper.abstract,
+    '期刊': paper.journalName,
+    '分类': paper.categoryName,
+    '文件路径': paper.filePath,
+    '日期': paper.publicationDate
+  })))
+
+  // 将工作表添加到工作簿
+  XLSX.utils.book_append_sheet(wb, ws, '论文数据')
+
+  // 生成 Excel 文件并触发下载
+  XLSX.writeFile(wb, 'papers.xlsx')
+}
 </script>
 <template>
     <el-card class="page-container">
@@ -321,12 +343,16 @@ const findPaper = async() =>{
                 
                 <!-- 搜索内容输入框 -->
                 <el-form-item>
-                <el-input v-model="searchContent" placeholder="请输入搜索内容"></el-input>
+                    <el-input v-model="searchContent" placeholder="请输入搜索内容"></el-input>
                 </el-form-item>
 
                 <!-- 确认查询按钮 -->
                 <el-form-item>
-                <el-button type="primary" @click="findPaper()">查询</el-button>
+                    <el-button type="primary" @click="findPaper()">查询</el-button>
+                </el-form-item>
+                    <!-- 导出到Excel按钮 -->
+                <el-form-item>
+                    <el-button type="success" @click="exportToExcel()">导出到Excel</el-button>
                 </el-form-item>
             </el-form>
         <!-- 文章列表 -->
@@ -361,19 +387,30 @@ const findPaper = async() =>{
                     <el-input v-model="paperModel.title" placeholder="请输入标题"></el-input>
                 </el-form-item>
                 <el-form-item label="分类">
-                    <el-input v-model="paperModel.category" placeholder="请输入分类"></el-input>
+                    <el-select v-model="paperModel.category" placeholder="请选择分类">
+                <el-option v-for="c in categorys" :key="c.id" :label="c.name" :value="c.name"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="简介">
                     <el-input v-model="paperModel.abstractText" placeholder="请输入简介"></el-input>
                 </el-form-item>
                 <el-form-item label="期刊">
-                    <el-input v-model="paperModel.journal" placeholder="请输入期刊"></el-input>
+                    <el-select v-model="paperModel.journal" placeholder="请选择期刊">
+                <el-option v-for="j in Journal" :key="j.id" :label="j.name" :value="j.name"></el-option>
+                    </el-select>
                 </el-form-item>
                 <el-form-item label="路径">
                     <el-input v-model="paperModel.file_path" placeholder="请输入路径"></el-input>
                 </el-form-item>
                 <el-form-item label="日期">
-                    <el-input v-model="paperModel.publicationDate" placeholder="请输入日期"></el-input>
+                    <!-- <el-input v-model="paperModel.publicationDate" placeholder="请输入日期"></el-input> -->
+                    <el-date-picker
+                        v-model="paperModel.publicationDate"
+                        type="date"
+                        placeholder="请选择日期"
+                        format="YYYY-MM-DD"  
+                        value-format="YYYY-MM-DD"> <!-- 注意这里需要大写 -->
+                    </el-date-picker>
                 </el-form-item>
                 <el-form-item label="作者1">
                     <el-input v-model="paperModel.author1" placeholder="请输入作者1"></el-input>

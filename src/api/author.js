@@ -19,3 +19,8 @@ export const authorDeleteService = (id) => {
 export const authorUpdateService = (authorData) => {
     return request.put('/author', authorData);
 }
+//论文关系网络
+
+export const authorPaperService =(author)=>{
+    return request.get('/Paper/search?id='+author.id)
+}
