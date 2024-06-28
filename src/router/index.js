@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory } from 'vue-router'
 
 //导入组件
 import LoginVue from '@/views/Login.vue'
@@ -9,11 +9,14 @@ import PaperManageVue from '@/views/paper/PaperManage.vue'
 import PaperAuthorVue from '@/views/paper/PaperAuthor.vue'
 import PaperJournalVue from '@/views/paper/PaperJournal.vue'
 import PaperKeywordVue from '@/views/paper/PaperKeyword.vue'
-
+import PaperkeyVue from '@/views/paper/Paperkey.vue'
 import UserAvatarVue from '@/views/user/UserAvatar.vue'
 import UserInfoVue from '@/views/user/UserInfo.vue'
 import UserResetPasswordVue from '@/views/user/UserResetPassword.vue'
+import PaperrefeVue from '@/views/paper/PaperRefe.vue'
+import PaperUploadVue from '@/views/paper/PaperUpload.vue'
 import component from 'element-plus/es/components/tree-select/src/tree-select-option.mjs'
+
 
 //定义路由关系
 const routes = [
@@ -27,7 +30,10 @@ const routes = [
             { path: '/user/resetPassword', component: UserResetPasswordVue },
             { path: '/paper/author', component: PaperAuthorVue},
             { path: '/paper/journal',component: PaperJournalVue},
-            { path: '/paper/keyword', component: PaperKeywordVue}
+            { path: '/paper/keyword', component: PaperKeywordVue },
+            { path: '/paper/refe', component: PaperrefeVue },
+            { path: '/paper/key', component: PaperkeyVue },
+            { path: '/paper/upload', component: PaperUploadVue }
 
         ]
     }
@@ -35,7 +41,7 @@ const routes = [
 
 //创建路由器
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: routes
 })
 

@@ -1,11 +1,27 @@
 import request from '@/utils/request.js'
 import { useTokenStore } from '@/stores/token.js'
 
+
 //论文列表查询
 export const paperListService = ()=>{
 
     return request.get('/Paper')
 }
+
+export const uploadService = (formData) => {
+    return request.post('/Paper/upload', formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    });
+};
+
+// api/paper.js
+export const downService = (paperName) => {
+    return request.get('/Paper/download?name='+paperName)
+};
+
+
 
 //论文添加
 export const paperAddService = (paperData)=>{
@@ -16,6 +32,8 @@ export const paperAddService = (paperData)=>{
 export const paperDeleteService = (id)=>{
     return request.delete('/Paper?id='+id)
 }
+
+
 
 //按作者姓名查询
 export const authorFindService = (name)=>{

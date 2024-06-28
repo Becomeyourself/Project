@@ -24,3 +24,7 @@ export const authorUpdateService = (authorData) => {
 export const authorPaperService =(author)=>{
     return request.get('/Paper/search?id='+author.id)
 }
+
+export const pidService = (name) => {
+    return request.get('/author/pid?pid=' + name)
+}

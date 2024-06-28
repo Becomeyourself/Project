@@ -1,4 +1,3 @@
-```html
 <script setup>
 import {
     Management,
@@ -28,7 +27,7 @@ import avatar from '@/assets/default.png'
                     </el-icon>
                     <span>论文管理</span>
                 </el-menu-item>
-                <el-sub-menu index="1">
+<!--                 <el-sub-menu index="1">
                     <template #title>
                         <el-icon>
                             <UserFilled />
@@ -53,7 +52,7 @@ import avatar from '@/assets/default.png'
                         </el-icon>
                         <span>重置密码</span>
                     </el-menu-item>
-                </el-sub-menu>
+                </el-sub-menu> -->
                 <el-sub-menu index="2">
                     <template #title>
                         <el-icon>
@@ -85,6 +84,24 @@ import avatar from '@/assets/default.png'
                         </el-icon>
                         <span>论文关键词</span>
                     </el-menu-item>
+                    <el-menu-item index="/paper/refe">
+                        <el-icon>
+                            <EditPen />
+                        </el-icon>
+                        <span>参考文献</span>
+                    </el-menu-item>
+                    <el-menu-item index="/paper/key">
+                        <el-icon>
+                            <EditPen />
+                        </el-icon>
+                        <span>关键词</span>
+                    </el-menu-item>
+                    <el-menu-item index="/paper/upload">
+                        <el-icon>
+                            <EditPen />
+                        </el-icon>
+                        <span>上传下载</span>
+                    </el-menu-item>
                 </el-sub-menu>
             </el-menu>
         
@@ -102,12 +119,12 @@ import avatar from '@/assets/default.png'
                         </el-icon>
                     </span>
                     <template #dropdown>
-                        <el-dropdown-menu>
+                        <!--<el-dropdown-menu>
                             <el-dropdown-item command="profile" :icon="User">基本资料</el-dropdown-item>
                             <el-dropdown-item command="avatar" :icon="Crop">更换头像</el-dropdown-item>
                             <el-dropdown-item command="password" :icon="EditPen">重置密码</el-dropdown-item>
                             <el-dropdown-item command="logout" :icon="SwitchButton">退出登录</el-dropdown-item>
-                        </el-dropdown-menu>
+                        </el-dropdown-menu> -->
                     </template>
                 </el-dropdown>
             </el-header>
@@ -172,7 +189,7 @@ import avatar from '@/assets/default.png'
     }
 }
 </style>
-```
+
 
 
 

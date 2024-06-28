@@ -20,3 +20,11 @@ export const categoryDeleteService = (id)=>{
 export const categoryUpdateService = (categoryData) =>{
     return request.put('/category',categoryData)
 }
+//父类别查询子类别
+export const cateseaService = (name) => {
+    return request.get('/category/season?name=' + name)
+}
+
+export const caterootService = () => {
+    return request.get('/category/root')
+}
