@@ -15,8 +15,14 @@ public class Paper_filesServiceImpl implements Paper_filesService {
 
     @Override
     public void add(paper_files p) {
-        Paper_filesMapper.add(p);
+        List<paper_files> results = Paper_filesMapper.search(p.getPaperId());
+        if (results.isEmpty()) {
+            Paper_filesMapper.add(p);
+        } else {
+            Paper_filesMapper.update(p);
+        }
     }
+
 
     @Override
     public void delete(Integer id) {

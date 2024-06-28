@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,11 +27,33 @@ public class CategoryController {
         List<Category> cs = categoryService.list();
         return Result.success(cs);
     }
+
+    @GetMapping("/root")
+    public Result<List<String>> findroot(){
+        List<Category> c = categoryService.findbyfather(0);
+        List<String> temp=new ArrayList<>();
+        for(Category a:c){
+            temp.add(a.getName());
+        }
+        return Result.success(temp);
+    }
+
     //按照id查询分类
     @GetMapping("/detail")
     public Result<Category> detail(Integer id){
         Category c = categoryService.findById(id);
         return Result.success(c);
+    }
+
+    @GetMapping("/season")
+    public Result<List<String>> detail(String name){
+        Integer id = categoryService.findByname(name).getId();
+        List<Category> c = categoryService.findbyfather(id);
+        List<String> temp=new ArrayList<>();
+        for(Category a:c){
+            temp.add(a.getName());
+        }
+        return Result.success(temp);
     }
 
     @PutMapping

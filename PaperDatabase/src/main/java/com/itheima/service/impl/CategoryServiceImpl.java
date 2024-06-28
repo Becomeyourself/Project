@@ -35,6 +35,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public List<Category> findbyfather(Integer id) {
+        return categoryMapper.findByfather(id);
+    }
+
+
+    @Override
     public Category findByname(String name) {
         Category c=categoryMapper.findByname(name);
         return c;

@@ -24,9 +24,13 @@ public interface Paper_authorMapper {
     @Select("select * from paper_authors where paper_authors.author_id =#{id}")
     List<Paper_author> findByaid(int id);
 
-    @Insert("insert into paper_authors(paper_id, author_id)" +
+   /* @Insert("insert into paper_authors(paper_id, author_id)" +
             "values(#{paper_id},#{author_id})")
-    void add(Integer paper_id, Integer author_id);
+    void add(Integer paper_id, Integer author_id);*/
+
+    @Insert("insert into paper_authors(paper_id, author_id)" +
+            "values(#{paperId},#{authorId})")
+    void add(Paper_author p);
 
     @Delete("delete from paper_authors where paper_id=#{name}")
     void delete(Integer name);

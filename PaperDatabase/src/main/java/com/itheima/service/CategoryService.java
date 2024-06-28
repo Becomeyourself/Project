@@ -14,6 +14,9 @@ public interface CategoryService {
     //根据id查询分类信息
     Category findById(Integer id);
 
+    List<Category>  findbyfather(Integer id);
+
+
     //根据名字查询分类信息
     Category findByname(String name);
 

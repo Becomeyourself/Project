@@ -22,7 +22,9 @@ public interface CategoryMapper {
     Category findById(Integer id);
     //查询父节点
     @Select("select * from categories where parent_id = #{id}")
-    Category findByfather(Integer id);
+    List<Category> findByfather(Integer id);
+
+
 
     //根据id删除
     @Delete("delete from categories where id=#{id}")

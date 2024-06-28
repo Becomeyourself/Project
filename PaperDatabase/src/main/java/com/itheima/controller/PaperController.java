@@ -5,12 +5,26 @@ import com.itheima.pojo.*;
 import com.itheima.service.Paper_filesService;
 import com.itheima.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import jakarta.servlet.http.HttpServletResponse;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -20,6 +34,9 @@ import java.util.stream.Collectors;
 public class PaperController {
     @Autowired
     PaperServiceImpl paperService;
+
+    @Autowired
+    Paper_keyServiceImpl Paper_keyService;
 
     @Autowired
     CategoryServiceImpl CategoryService;
@@ -96,15 +113,20 @@ public class PaperController {
 
         Papers p=new Papers();
         p.setTitle(paperDo.getTitle());
-        p.setAbstract(paperDo.getAbstractText());
+        if(!Objects.equals(paperDo.getAbstractText(), "")) {
+            p.setAbstract(paperDo.getAbstractText());
+        }
         p.setCategoryId(c.getId());
         List<Journal> j=JournalService.findByName(paperDo.getJournal());
 
         p.setJournalId(j.get(0).getId());
-        p.setFilePath(paperDo.getFile_path());
+        if(!Objects.equals(paperDo.getFile_path(), "")) {
+            p.setFilePath(paperDo.getFile_path());
+        }
         p.setPublicationDate(paperDo.getPublicationDate());
         List<Papers> papers=paperService.find_by_title(p.getTitle());
-        author author1 = null,author2 = null;
+        author author1 = new author(),author2 = new author();
+        System.out.println(paperDo.getAuthor1());
         author1.setName(paperDo.getAuthor1()) ;
         author2.setName(paperDo.getAuthor2()) ;
         Integer aid1=null;
@@ -149,11 +171,17 @@ public class PaperController {
     @DeleteMapping
     public Result<String> delete_paper(Integer id){
         List<Papers> p=paperService.find_by_id(id);
-        if(p != null && !p.isEmpty())  return Result.error("no such paper");
-        else{
+        if(p.isEmpty()) {
+            return Result.error("no such paper");
+        } else{
+            System.out.println(1);
             paper_authorService.delete(id);
+            System.out.println(11);
             paperService.dele_paper(id);
+            System.out.println(112);
+            Paper_keyService.deletep(id);
 
+            System.out.println(113);
             return Result.success();
 
         }
@@ -212,13 +240,13 @@ public class PaperController {
         //打包成jar包前记得修改URL！！！！！！！！
         String name=file.getOriginalFilename();
         String UID= UUID.randomUUID().toString()+name.substring(name.lastIndexOf("."));
-        file.transferTo(new File("C:\\Users\\kjhgb\\Desktop\\java\\files\\"+UID));
+        file.transferTo(new File("C:\\Users\\42208\\Desktop\\file\\"+UID));
         //根据filename找到paperid
         List<Papers> temp=paperService.find_by_title(papername);
         Integer paperid=temp.get(0).getId();
         paper_files pf=new paper_files();
         pf.setPaperId(paperid);
-        pf.setFilePath("C:\\Users\\kjhgb\\Desktop\\java\\files\\"+UID);
+        pf.setFilePath("C:\\Users\\42208\\Desktop\\file\\"+UID);
         pf.setUploadDate(LocalDateTime.now().toString());
         Paper_filesService.add(pf);
 
@@ -228,21 +256,40 @@ public class PaperController {
 
     //返回文件本地地址
     @GetMapping("/download")
-    public  Result<String> dowload(String name){
-        //papername->id
-        Integer id=paperService.find_by_title(name).get(0).getId();
-        String filepath="";
-        if(!Paper_filesService.search(id).isEmpty()) {
-            filepath = Paper_filesService.search(id).get(0).getFilePath();
-            return Result.success(filepath);
+    public Result<Map<String, String>> download(@RequestParam String name) {
+        try {
+            // 获取论文ID
+            Integer id = paperService.find_by_title(name).get(0).getId();
+
+            // 查找文件路径
+            String filepath = Paper_filesService.search(id).isEmpty() ? "" : Paper_filesService.search(id).get(0).getFilePath();
+            if (!filepath.isEmpty()) {
+                // 获取文件格式
+                String fileType = Files.probeContentType(Paths.get(filepath));
+                // 读取文件数据并进行Base64编码
+                byte[] fileData = Files.readAllBytes(Paths.get(filepath));
+                String encodedFileData = Base64.getEncoder().encodeToString(fileData);
+
+                Map<String, String> response = new HashMap<>();
+                response.put("fileType", fileType);
+                response.put("fileData", encodedFileData);
+                return Result.success(response);
+            } else {
+                return Result.error("File not uploaded yet!");
+            }
+        } catch (Exception e) {
+            // 异常处理
+            e.printStackTrace();
+            return Result.error(e.getMessage());
         }
-        return Result.error("This file is not upload yet!");
     }
 
     @PostMapping("/addrefe")
     public  Result<String> addrefe(String name1,String name2){
         List<Papers> p=paperService.find_by_title(name1);
-        if(p.isEmpty()) return Result.error("no such files!");
+        if(p.isEmpty()) {
+            return Result.error("no such files!");
+        }
         List<Papers> p1=paperService.find_by_title(name2);
         if(p1.isEmpty()){
             //在paper插入参考文献
@@ -259,7 +306,7 @@ public class PaperController {
         pp.setReferenceId(id2);
         Paper_refeService.add(pp);
 
-        return Result.success();
+        return Result.success("");
 
     }
 
@@ -267,11 +314,15 @@ public class PaperController {
     public  Result<String> delerefe(String name1,String name2){
         paper_refe pp=new paper_refe();
         List<Papers> p=paperService.find_by_title(name1);
-        if(p.isEmpty()) return Result.error("no such files!");
+        if(p.isEmpty()) {
+            return Result.error("no such files!");
+        }
         pp.setPaperId(p.get(0).getId());
 
-        p=paperService.find_by_title(name1);
-        if(p.isEmpty()) return Result.error("no such files!");
+        p=paperService.find_by_title(name2);
+        if(p.isEmpty()) {
+            return Result.error("no such files!");
+        }
         pp.setReferenceId(p.get(0).getId());
 
 
@@ -283,7 +334,9 @@ public class PaperController {
 
     @GetMapping("/searchrefe")
     Result<List<String>> searchrefe(String name){
-        if(paperService.find_by_title(name).isEmpty()) return Result.error("no such files");
+        if(paperService.find_by_title(name).isEmpty()) {
+            return Result.error("no such files");
+        }
         Integer id=paperService.find_by_title(name).get(0).getId();
         List<paper_refe> plist=Paper_refeService.searchlist(id);
         List<String> result=new ArrayList<>();
@@ -293,5 +346,66 @@ public class PaperController {
         return Result.success(result);
 
     }
+    //查找谁参考了name
+    @GetMapping("/searchpa")
+    Result<List<String>> searchpa(String name){
+        if(paperService.find_by_title(name).isEmpty()) {
+            return Result.error("no such files");
+        }
+        Integer id=paperService.find_by_title(name).get(0).getId();
+        List<paper_refe> plist=Paper_refeService.searchrlist(id);
+        List<String> result=new ArrayList<>();
+        for(paper_refe a:plist){
+            result.add(paperService.find_by_id(a.getPaperId()).get(0).getTitle());
+        }
+        return Result.success(result);
+
+    }
+
+    @GetMapping("/cal")
+    Result<Integer>  cal(String name) throws IOException {
+        Integer id=paperService.find_by_title(name).get(0).getId();
+        String filepath="";
+        Integer score=0;
+        if(!Paper_filesService.search(id).isEmpty()) {
+            filepath = Paper_filesService.search(id).get(0).getFilePath();
+            long fileSize =0;
+            System.out.println(filepath);
+            //fileSize = Files.size(Paths.get(filepath)); // 计算文件大小
+            try (BufferedReader reader = new BufferedReader(new FileReader(filepath, StandardCharsets.UTF_8))) {
+                int c;
+                while ((c = reader.read()) != -1) {
+                    if (!Character.isWhitespace(c)) { // 如果你不想计算空白字符，可以添加这个条件
+                        fileSize++;
+                    }
+                }
+                // 在这里，charCount包含了文件中非空白字符的数量（如果你添加了上面的条件）
+                // 或者包含了所有字符的数量（如果没有添加条件）
+                // 你可以将charCount封装到你的Result对象中并返回
+            } catch (IOException e) {
+                // 处理文件读取错误
+                e.printStackTrace();
+                return Result.error("Error reading the file: " + e.getMessage());
+            }
+            System.out.println(fileSize);
+            if (fileSize< 10) {
+                score += 1;
+            } else if (fileSize <= 20) {
+                score += 2;
+            } else {
+                score += 3;
+            }
+            System.out.println(score);
+            //计算参考文献个数
+            List<paper_refe> p = Paper_refeService.searchrlist(id);
+            score+=p.size();
+            System.out.println(score);
+            return Result.success(score);
+        }
+        else {
+            return Result.error("no such files!");
+        }
+    }
+
 
 }

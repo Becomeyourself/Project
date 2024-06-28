@@ -32,7 +32,10 @@ public class paper_authorServiceImpl implements paper_authorService {
 
     @Override
     public void add(Integer paper_id, Integer author_id) {
-        Paper_authorMapper.add(paper_id, author_id);
+        Paper_author p=new Paper_author();
+        p.setAuthorId(author_id);
+        p.setPaperId(paper_id);
+        Paper_authorMapper.add(p);
     }
 
     @Override

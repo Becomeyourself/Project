@@ -1,11 +1,9 @@
 package com.itheima.mapper;
 
 
+import com.itheima.pojo.Keywords;
 import com.itheima.pojo.paper_files;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -23,6 +21,9 @@ public interface Paper_filesMapper {
 
     @Select("select * from paper_files where paper_id=#{id}")
     List<paper_files> search(Integer id);
+
+    @Update("update paper_files SET file_path = #{filePath} where paper_id = #{paperId}")
+    void update(paper_files temp);
 
 
 }

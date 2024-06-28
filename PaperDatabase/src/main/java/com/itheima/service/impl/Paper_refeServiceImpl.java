@@ -33,4 +33,9 @@ public class Paper_refeServiceImpl implements Paper_refeService {
     public List<paper_refe> searchlist(Integer id) {
         return Paper_refeMapper.searchlist(id);
     }
+
+    @Override
+    public List<paper_refe> searchrlist(Integer id) {
+        return Paper_refeMapper.searchrlist(id);
+    }
 }

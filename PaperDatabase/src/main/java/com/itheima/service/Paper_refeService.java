@@ -15,4 +15,6 @@ public interface Paper_refeService {
     void delete(paper_refe p);
 
     List<paper_refe> searchlist(Integer id);
+
+    List<paper_refe> searchrlist(Integer id);
 }

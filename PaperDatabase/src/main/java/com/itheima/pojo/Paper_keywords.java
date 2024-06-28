@@ -7,6 +7,6 @@ import lombok.Data;
 @Data
 public class Paper_keywords {
     @NotNull
-    private int paper_id;
-    private int keyword_id;
+    private int paperId;
+    private int keywordId;
 }

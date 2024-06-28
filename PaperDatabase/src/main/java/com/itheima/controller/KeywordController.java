@@ -29,7 +29,9 @@ public class KeywordController {
     //根据id查询分类信息
     Result<List<Keywords>> findById(String name){
         Integer id;
-        if(PaperService.find_by_title(name).isEmpty())  return Result.error("No such files!");
+        if(PaperService.find_by_title(name).isEmpty()) {
+            return Result.error("No such files!");
+        }
         id=PaperService.find_by_title(name).get(0).getId();
         return Result.success(keywordService.findById(id));
     }

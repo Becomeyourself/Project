@@ -4,10 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="实现了论文的修改">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+    <list default="true" id="afc33218-01de-4d49-9a0a-fb7cff5560b6" name="更改" comment="final">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765/storage_v2/_src_/schema/information_schema.FNRwLQ.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765/storage_v2/_src_/schema/mysql.osA4Bg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765/storage_v2/_src_/schema/performance_schema.kIw0nw.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765/storage_v2/_src_/schema/sys.zb4BAA.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/paperkeywordController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_keyMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/Paper_keyServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/paper_keywordService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765/storage_v2/_src_/schema/paper.jBFYBg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/86d1bea6-3741-48d2-862a-be8d30f39765/storage_v2/_src_/schema/paper.jBFYBg.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/AuthorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/AuthorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/KeywordController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/KeywordController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/controller/PaperController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/CategoryMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/CategoryMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_authorMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_authorMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_filesMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_filesMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_refeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/mapper/Paper_refeMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/pojo/Paper_keywords.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/pojo/Paper_keywords.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/Paper_refeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/Paper_refeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/KeywordServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/KeywordServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/Paper_filesServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/Paper_filesServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/Paper_refeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/Paper_refeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/paper_authorServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/PaperDatabase/src/main/java/com/itheima/service/impl/paper_authorServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +89,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;Spring Boot.BigEventApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;后端&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
@@ -72,6 +101,7 @@
     &quot;project.structure.last.edited&quot;: &quot;项目&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -83,14 +113,18 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.itheima.service" />
-      <recent name="com.itheima.service.impl" />
-      <recent name="com.itheima.mapper" />
-      <recent name="com.itheima.pojo" />
       <recent name="com.itheima.controller" />
+      <recent name="com.itheima.mapper" />
+      <recent name="com.itheima.service.impl" />
+      <recent name="com.itheima.service" />
+      <recent name="com.itheima.pojo" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.BigEventApplication">
+    <configuration name="project" type="Cloud Toolkit Multirun" factoryName="Cloud Toolkit Multirun" separateTabs="true" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="false" delayTime="0">
+      <runConfiguration name="BigEventApplication" type="Spring Boot" />
+      <method v="2" />
+    </configuration>
     <configuration name="BigEventApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="big-event" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.itheima.BigEventApplication" />
@@ -98,6 +132,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Spring Boot.BigEventApplication" />
+    </list>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
@@ -127,6 +164,20 @@
       <workItem from="1719065277075" duration="1012000" />
       <workItem from="1719108986072" duration="5335000" />
       <workItem from="1719118673078" duration="8368000" />
+      <workItem from="1719142846556" duration="10178000" />
+      <workItem from="1719212024607" duration="60000" />
+      <workItem from="1719212555506" duration="334000" />
+      <workItem from="1719212906930" duration="1944000" />
+      <workItem from="1719218429357" duration="3180000" />
+      <workItem from="1719225707221" duration="11998000" />
+      <workItem from="1719297503606" duration="11766000" />
+      <workItem from="1719322868814" duration="486000" />
+      <workItem from="1719323396472" duration="54000" />
+      <workItem from="1719323887253" duration="1546000" />
+      <workItem from="1719554393040" duration="8136000" />
+      <workItem from="1719564520575" duration="326000" />
+      <workItem from="1719565024028" duration="258000" />
+      <workItem from="1719565399841" duration="316000" />
     </task>
     <task id="LOCAL-00001" summary="重新配置了IDEA">
       <option name="closed" value="true" />
